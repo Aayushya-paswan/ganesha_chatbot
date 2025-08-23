@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ganesha_chatbot</title>
+  <link rel="shortcut icon" href="/static/assets/favicon.ico" type="image/x-icon">
+  <style>
+    @import url(https://fonts.googleapis.com/css2?family=Lato&display=swap);
+    @import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
+    </style>    
+<body>
+  <div id="Ganesha_chatbot">
+    <div class="min-h-screen flex flex-col bg-gradient-to-r from-orange-50 to-yellow-50">
+      <header class="bg-gradient-to-r from-amber-500 to-orange-400 shadow-md top-0 z-10">
+        <nav
+          class="container mx-auto p-3 md:p-4 flex flex-col md:flex-row items-center justify-center md:justify-between gap-3 md:gap-0">
+          <div class="flex items-center gap-2 md:gap-3"> <img
+              src="/static/assets/ganesha_logo.png"
+              alt="Ganesha icon" class="w-12 h-12 md:w-16 md:h-16 hover:scale-110 transition-transform duration-300" />
+            <h1 class="text-3xl md:text-4xl font-bold text-white" style="font-family:DM Serif Text, serif">Ganesha
+              Chatbot</h1>
+          </div>
+          <ul class="flex gap-4 md:gap-8"> <a href="about.html"
+              class="text-xl md:text-2xl lg:text-3xl text-white transition-all duration-300 ease-in-out transform hover:scale-105 p-2 rounded-lg hover:bg-orange-400/20 relative group"
+              style="font-family:DM Serif Text, serif"> About <span
+                class="absolute bottom-0 left-0 w-0 h-1 bg-white transition-all duration-300 ease-in-out group-hover:w-full"></span>
+            </a> <a href="index.html"
+              class="text-xl md:text-2xl lg:text-3xl text-white transition-all duration-300 ease-in-out transform hover:scale-105 p-2 rounded-lg hover:bg-orange-400/20 relative group"
+              style="font-family:DM Serif Text, serif"> Home <span
+                class="absolute bottom-0 left-0 w-0 h-1 bg-white transition-all duration-300 ease-in-out group-hover:w-full"></span>
+            </a> </ul>
+        </nav>
+      </header>
+      <main class="flex-1 flex justify-center items-start p-3 md:p-6">
+        <div class="w-full max-w-6xl">
+          <div
+            class="bg-gradient-to-br from-orange-100 via-yellow-50 to-orange-200 rounded-2xl shadow-xl border border-orange-300 p-4 md:p-6 lg:p-8 relative overflow-hidden"
+            style="height:90vh;;background-image:url(/static/assets/ganesha_bg_60opac.png);background-repeat:no-repeat;background-position:center;background-size:32rem">
+            <div class="text-center h-full flex flex-col justify-between relative z-10">
+              <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-700 mb-2 md:mb-4"
+                  style="font-family:DM Serif Text, serif">Chat with Ganesha</h2>
+                <p class="text-lg md:text-xl text-gray-600 mb-4 md:mb-8">Begin your spiritual conversation with Lord
+                  Ganesha</p>
+              </div>
+              <div class="overflow-y-auto flex-grow space-y-4 md:space-y-6 my-4 md:my-6 px-1 md:px-2"
+                style="max-height:calc(100vh - 280px)">
+                <div class="flex gap-2 mb-3 md:mb-4 animate-fade-in">
+                  <div class="text-gray-800 rounded-xl p-3 md:p-4 shadow-lg w-full md:w-5/6 ml-auto"
+                    style="border-radius:24px 24px 0px 24px;background:linear-gradient(#fff, #fff) padding-box, linear-gradient(to right, var(--color-orange-100), var(--color-yellow-200)) border-box;border:1px solid transparent">
+                    <div class="font-bold text-gray-800 mb-1 md:mb-2">You</div>
+                    <p class="text-base md:text-lg" id="userText">Hi Bappa!</p>
+                  </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-2 md:gap-3 mb-3 md:mb-4 animate-fade-in-up"> <img
+                    src="/static/assets/ganesha_logo.png"
+                    alt="Ganesha avatar"
+                    class="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-xl border border-orange-300 self-center md:self-end mx-auto md:mx-0 hover:scale-105 transition-transform duration-300" />
+                  <div
+                    class="bg-orange-100 text-gray-700 border border-orange-300 p-3 md:p-4 shadow-lg w-full md:w-5/6 text-left"
+                    style="border-radius:0px 24px 24px 24px">
+                    <div class="font-bold text-gray-800 mb-1 md:mb-2">Ganesha</div>
+                    <p class="text-base md:text-lg" id="ganeshaResponse">Blessings! How can I help you today? I am Lord
+                      Ganesha, the remover of obstacles and bringer of wisdom. Ask me anything about Hindu philosophy,
+                      mythology, or spiritual guidance.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="sticky bottom-0 pt-4 bg-gradient-to-b from-transparent to-orange-100/90 pb-2">
+                <form action="/handle" method="post" class="w-full">
+                  <div class="flex flex-col md:flex-row items-center gap-3 md:gap-4">
+                    <div class="w-full flex-1 relative"> <input type="text" id="name" name="name"
+                        placeholder="Type your message to Ganesha..." required=""
+                        class="w-full p-3 md:p-4 rounded-2xl border-2 border-orange-300 bg-white text-gray-800 placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-300 shadow-sm hover:shadow-md text-sm md:text-base" />
+                    </div> <button type="button" id="talk" aria-label="Talk to Ganesha"
+                      class="w-full md:w-auto bg-gradient-to-r from-orange-400 to-yellow-400 hover:from-orange-500 hover:to-yellow-500 text-white font-bold py-3 md:py-4 px-4 md:px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-orange-500 flex items-center justify-center whitespace-nowrap"
+                      style="min-width:120px;max-width:100%;min-height:48px"> Talk With Bappa </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer
+        class="bg-gradient-to-r from-orange-200 to-yellow-200 border-t border-orange-300 mt-6 md:mt-8 py-4 md:py-6">
+        <div class="container mx-auto px-4 text-center">
+          <h5 class="text-base md:text-lg font-semibold text-gray-800 mb-3 md:mb-4">Made with ❤️ by Aayushya,Mukund &amp;
+            Priyansu</h5>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-3 md:mb-4"> <a
+              href="https://github.com/Aayushya-paswan" target="_blank" rel="noopener noreferrer"
+              class="inline-block px-3 md:px-4 py-2 bg-orange-100 hover:bg-orange-200 rounded-lg transition-all duration-200 hover:text-orange-600 border border-orange-300 hover:shadow-md text-sm md:text-base">
+              Aayushya&#x27;s GitHub </a> <a href="https://github.com/priyansu-1o" target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block px-3 md:px-4 py-2 bg-orange-100 hover:bg-orange-200 rounded-lg transition-all duration-200 hover:text-orange-600 border border-orange-300 hover:shadow-md text-sm md:text-base">
+              Priyansu&#x27;s GitHub </a> <a href="https://github.com/mukund" target="_blank" rel="noopener noreferrer"
+              class="inline-block px-3 md:px-4 py-2 bg-orange-100 hover:bg-orange-200 rounded-lg transition-all duration-200 hover:text-orange-600 border border-orange-300 hover:shadow-md text-sm md:text-base">
+              Mukund&#x27;s GitHub </a> </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-3 md:gap-4"> <a
+              href="https://www.linkedin.com/in/aayushya78/" target="_blank" rel="noopener noreferrer"
+              class="inline-block px-3 md:px-4 py-2 bg-orange-100 hover:bg-orange-200 rounded-lg transition-all duration-200 hover:text-orange-600 border border-orange-300 hover:shadow-md text-sm md:text-base">
+              Aayushya&#x27;s LinkedIn </a> <a href="https://www.linkedin.com/in/priyansu-samanta-7924b930b/"
+              target="_blank" rel="noopener noreferrer"
+              class="inline-block px-3 md:px-4 py-2 bg-orange-100 hover:bg-orange-200 rounded-lg transition-all duration-200 hover:text-orange-600 border border-orange-300 hover:shadow-md text-sm md:text-base">
+              Priyansu&#x27;s LinkedIn </a> <a href="https://www.linkedin.com/in/mukund" target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block px-3 md:px-4 py-2 bg-orange-100 hover:bg-orange-200 rounded-lg transition-all duration-200 hover:text-orange-600 border border-orange-300 hover:shadow-md text-sm md:text-base">
+              Mukund&#x27;s LinkedIn </a> </div>
+        </div>
+      </footer>
+      <style>
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fadeIn 0.5s ease-out;
+        }
+
+        .animate-fade-in-up {
+          animation: fadeInUp 0.5s ease-out;
+        }
+
+        :root {
+          --color-orange-100: rgb(255, 237, 213);
+          --color-yellow-200: rgb(254, 240, 138);
+        }
+      </style>
+    </div>
+  </div>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      content: ["./src/**/*.{html,js}"],
+      theme: { "name": "Bluewave", "fontFamily": { "sans": ["Open Sans", "ui-sans-serif", "system-ui", "sans-serif", "\"Apple Color Emoji\"", "\"Segoe UI Emoji\"", "\"Segoe UI Symbol\"", "\"Noto Color Emoji\""] }, "extend": { "fontFamily": { "title": ["Lato", "ui-sans-serif", "system-ui", "sans-serif", "\"Apple Color Emoji\"", "\"Segoe UI Emoji\"", "\"Segoe UI Symbol\"", "\"Noto Color Emoji\""], "body": ["Open Sans", "ui-sans-serif", "system-ui", "sans-serif", "\"Apple Color Emoji\"", "\"Segoe UI Emoji\"", "\"Segoe UI Symbol\"", "\"Noto Color Emoji\""] }, "colors": { "neutral": { "50": "#f7f7f7", "100": "#eeeeee", "200": "#e0e0e0", "300": "#cacaca", "400": "#b1b1b1", "500": "#999999", "600": "#7f7f7f", "700": "#676767", "800": "#545454", "900": "#464646", "950": "#282828" }, "primary": { "50": "#f3f1ff", "100": "#e9e5ff", "200": "#d5cfff", "300": "#b7a9ff", "400": "#9478ff", "500": "#7341ff", "600": "#631bff", "700": "#611bf8", "800": "#4607d0", "900": "#3c08aa", "950": "#220174", "DEFAULT": "#611bf8" } } }, "fontSize": { "xs": ["12px", { "lineHeight": "19.200000000000003px" }], "sm": ["14px", { "lineHeight": "21px" }], "base": ["16px", { "lineHeight": "25.6px" }], "lg": ["18px", { "lineHeight": "27px" }], "xl": ["20px", { "lineHeight": "28px" }], "2xl": ["24px", { "lineHeight": "31.200000000000003px" }], "3xl": ["30px", { "lineHeight": "36px" }], "4xl": ["36px", { "lineHeight": "41.4px" }], "5xl": ["48px", { "lineHeight": "52.800000000000004px" }], "6xl": ["60px", { "lineHeight": "66px" }], "7xl": ["72px", { "lineHeight": "75.60000000000001px" }], "8xl": ["96px", { "lineHeight": "100.80000000000001px" }], "9xl": ["128px", { "lineHeight": "134.4px" }] }, "borderRadius": { "none": "0px", "sm": "6px", "DEFAULT": "12px", "md": "18px", "lg": "24px", "xl": "36px", "2xl": "48px", "3xl": "72px", "full": "9999px" }, "spacing": { "0": "0px", "1": "4px", "2": "8px", "3": "12px", "4": "16px", "5": "20px", "6": "24px", "7": "28px", "8": "32px", "9": "36px", "10": "40px", "11": "44px", "12": "48px", "14": "56px", "16": "64px", "20": "80px", "24": "96px", "28": "112px", "32": "128px", "36": "144px", "40": "160px", "44": "176px", "48": "192px", "52": "208px", "56": "224px", "60": "240px", "64": "256px", "72": "288px", "80": "320px", "96": "384px", "px": "1px", "0.5": "2px", "1.5": "6px", "2.5": "10px", "3.5": "14px" } },
+      plugins: [],
+      important: '#Ganesha_chatbot'
+    };
+  </script>
+
+</body>
+
+</html>
