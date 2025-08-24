@@ -136,6 +136,10 @@ def handle_message():
         'response': response
     })
 
+@app.route('/about.html')
+def about():
+    return render_template('about.html')
+
 @app.route('/process_audio', methods=['POST'])
 def process_audio():
     try:
