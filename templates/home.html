@@ -70,10 +70,61 @@
       margin: 10px 0;
       font-weight: bold;
     }
+
+    /* Ganesha Speaking GIF Overlay */
+    #ganesha-speaking-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    #ganesha-speaking-gif {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 15px;
+      box-shadow: 0 0 50px rgba(255, 153, 0, 0.5);
+    }
+
+    #close-ganesha-overlay {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #close-ganesha-overlay:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
   </style>
 </head>
 
 <body>
+  <!-- Ganesha Speaking Overlay -->
+  <div id="ganesha-speaking-overlay">
+    <button id="close-ganesha-overlay">
+      <i class="fas fa-times"></i>
+    </button>
+    <img id="ganesha-speaking-gif" src="/static/assets/ganesha_speaking.gif" alt="Ganesha Speaking">
+  </div>
+
   <div id="Ganesha_chatbot">
     <div class="min-h-screen flex flex-col bg-gradient-to-r from-orange-50 to-yellow-50">
       <header class="bg-gradient-to-r from-amber-500 to-orange-400 shadow-md top-0 z-10">
@@ -199,10 +250,22 @@
         const userInput = document.getElementById('user-input');
         const talkButton = document.getElementById('talk-button');
         const sendButton = document.getElementById('send-button');
+        const ganeshaOverlay = document.getElementById('ganesha-speaking-overlay');
+        const closeOverlayBtn = document.getElementById('close-ganesha-overlay');
         
         let mediaRecorder;
         let audioChunks = [];
         let isRecording = false;
+        let currentAudio = null;
+        
+        // Close overlay when close button is clicked
+        closeOverlayBtn.addEventListener('click', function() {
+            hideGaneshaOverlay();
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+        });
         
         // Check if browser supports media recording
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -264,6 +327,14 @@
             }
         });
         
+        function showGaneshaOverlay() {
+            ganeshaOverlay.style.display = 'flex';
+        }
+        
+        function hideGaneshaOverlay() {
+            ganeshaOverlay.style.display = 'none';
+        }
+        
         function startRecording() {
             if (mediaRecorder && mediaRecorder.state === 'inactive') {
                 audioChunks = [];
@@ -311,8 +382,7 @@
                         
                         // Play the audio response
                         if (data.audio_url) {
-                            const audio = new Audio(data.audio_url);
-                            audio.play().catch(e => console.error('Error playing audio:', e));
+                            playAudioResponse(data.audio_url);
                         }
                     }
                 })
@@ -322,6 +392,28 @@
                 });
             };
             reader.readAsDataURL(audioBlob);
+        }
+        
+        function playAudioResponse(audioUrl) {
+            showGaneshaOverlay();
+            
+            currentAudio = new Audio(audioUrl);
+            currentAudio.play().catch(e => {
+                console.error('Error playing audio:', e);
+                hideGaneshaOverlay();
+            });
+            
+            // Hide overlay when audio ends
+            currentAudio.onended = function() {
+                hideGaneshaOverlay();
+                currentAudio = null;
+            };
+            
+            // Also hide overlay if there's an error
+            currentAudio.onerror = function() {
+                hideGaneshaOverlay();
+                currentAudio = null;
+            };
         }
         
         function sendTextMessage() {
@@ -366,8 +458,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.audio_url) {
-                    const audio = new Audio(data.audio_url);
-                    audio.play().catch(e => console.error('Error playing audio:', e));
+                    playAudioResponse(data.audio_url);
                 }
             })
             .catch(error => {
