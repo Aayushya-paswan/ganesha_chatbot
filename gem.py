@@ -1,6 +1,5 @@
 from google import genai
 from google.genai import types
-# Initialize the client with your API key
 client = genai.Client(api_key="AIzaSyAbfe_2yOufBoSANZ7-Yk8uRNVyIkyDv8o")
 
 system_prompt = """
