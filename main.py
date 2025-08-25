@@ -15,7 +15,6 @@ import json
 import subprocess
 from pydub import AudioSegment
 
-# Import your existing modules
 from gem import generate_gemini_response
 
 app = Flask(__name__)
@@ -40,10 +39,9 @@ def speech_to_text(audio_file_path=None, audio_data=None):
                 recognizer.adjust_for_ambient_noise(source)
                 audio = recognizer.record(source)
         elif audio_data:
-            # Process audio data directly
-            audio = sr.AudioData(audio_data, 16000, 2)  # Assuming 16kHz sample rate, 2 bytes per sample
+            
+            audio = sr.AudioData(audio_data, 16000, 2)  
         else:
-            # Process from microphone
             with sr.Microphone() as source:
                 print("🎙 Speak now...")
                 recognizer.adjust_for_ambient_noise(source)
