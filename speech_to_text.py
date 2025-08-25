@@ -23,32 +23,7 @@ def speech_to_text():
         print("⚠️ API error:", e)
         return ""
 
-# 🔊 Convert text → speech
-def text_to_speech(text: str) -> str:
-    async def say(text, file_name):
-        communicate = edge_tts.Communicate(text, "en-IN-PrabhatNeural")
-        await communicate.save(file_name)
 
-    # create unique filename each time
-    ts = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
-    file_name = f"output_{ts}.mp3"
-
-    # run TTS
-    asyncio.run(say(text, file_name))
-
-    # play audio
-    playsound(file_name)
-
-    # optional: cleanup old files (keep only latest 5)
-    old_files = sorted(glob.glob("output_*.mp3"))
-    if len(old_files) > 5:
-        for f in old_files[:-5]:
-            try:
-                os.remove(f)
-            except:
-                pass
-
-    return file_name
 
 
 if __name__ == "__main__":

@@ -360,39 +360,54 @@
         }
         
         function sendAudioToServer(audioBlob) {
-            // Convert blob to base64 for more reliable transmission
-            const reader = new FileReader();
-            reader.onloadend = function() {
-                const base64Audio = reader.result;
+        // Create FormData and append the audio blob directly
+        const formData = new FormData();
+        
+        // Create a filename with webm extension
+        const fileName = `recording_${Date.now()}.webm`;
+        
+        // Append the blob with the correct field name and filename
+        formData.append('audio', audioBlob, fileName);
+        
+        // Show processing message
+        addMessage("Processing your voice...", 'status');
+        
+        fetch('/process_audio', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Server responded with error');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Remove the status message
+            const statusMessages = chatContainer.querySelectorAll('.status-message');
+            statusMessages.forEach(msg => msg.remove());
+            
+            if (data.error) {
+                addMessage(data.error, 'error');
+            } else {
+                addMessage(data.text, 'user');
+                addMessage(data.response, 'bot');
                 
-                const formData = new FormData();
-                formData.append('audio_data', base64Audio);
-                
-                fetch('/process_audio', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        addMessage(data.error, 'error');
-                    } else {
-                        addMessage(data.text, 'user');
-                        addMessage(data.response, 'bot');
-                        
-                        // Play the audio response
-                        if (data.audio_url) {
-                            playAudioResponse(data.audio_url);
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    addMessage('Failed to process audio. Please try again.', 'error');
-                });
-            };
-            reader.readAsDataURL(audioBlob);
-        }
+                // Play the audio response
+                if (data.audio_url) {
+                    playAudioResponse(data.audio_url);
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Remove the status message
+            const statusMessages = chatContainer.querySelectorAll('.status-message');
+            statusMessages.forEach(msg => msg.remove());
+            
+            addMessage('Failed to process audio. Please try again.', 'error');
+        });
+    }
         
         function playAudioResponse(audioUrl) {
             showGaneshaOverlay();
