@@ -15,7 +15,7 @@ Built with:
 - 💬 **Text Chat**: Type and get instant replies  
 - 🔊 **Voice Output**: Listen to Bappa’s response in natural voice (`en-IN-PrabhatNeural`)  
 - ⚡ **Real-Time Processing**: Handles both speech-to-text and text-to-speech  
-- 🌐 **Deployed App**: Accessible via the web  
+- 🌐 **Deployed App**: https://ganeshachatbot-production.up.railway.app/
 
 ---
 
