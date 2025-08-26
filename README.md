@@ -4,7 +4,7 @@ An **AI-powered conversational chatbot** that lets users talk to **Ganesh Bappa*
 It supports **text and voice conversations**, with responses delivered in **natural voice** using AI-powered speech synthesis.  
 
 Built with:  
-- **Frontend** → React + TailwindCSS  
+- **Frontend** → HTML + TailwindCSS  
 - **Backend** → Flask (Python)  
 - **AI Models** → Gemini API (LLM), Google Speech-to-Text, Edge-TTS (Azure Neural Voice)  
 
@@ -41,7 +41,7 @@ Frontend (Displays response + plays audio)
 ## ⚙️ Tech Stack  
 
 ### **Frontend**
-- React.js  
+- HTML, CSS
 - TailwindCSS  
 - MediaRecorder API (voice recording)  
 - Axios / Fetch  
@@ -95,19 +95,10 @@ Frontend runs at: `http://localhost:3000/`
 ## 🌍 Deployment  
 
 The app is deployed on **[Your Deployment Platform (e.g., Railway / Render / Vercel)]**.  
-👉 Live Demo: [https://your-deployment-link.com](https://your-deployment-link.com)  
+👉 Live Demo: https://ganeshachatbot-production.up.railway.app/
 
 ---
 
-## 📸 Screenshots  
-
-### 💬 Chat Interface
-![Chat UI](./screenshots/chat-ui.png)
-
-### 🎤 Voice Interaction
-![Voice Recording](./screenshots/voice-ui.png)
-
----
 
 ## 🔮 Future Enhancements  
 - Multi-language support (Hindi, Marathi, Sanskrit)  
@@ -120,7 +111,6 @@ The app is deployed on **[Your Deployment Platform (e.g., Railway / Render / Ver
 
 ## 🙏 Acknowledgements  
 - [Flask](https://flask.palletsprojects.com/)  
-- [React](https://reactjs.org/)  
 - [TailwindCSS](https://tailwindcss.com/)  
 - [Google SpeechRecognition](https://pypi.org/project/SpeechRecognition/)  
 - [Azure Edge-TTS](https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/)  
