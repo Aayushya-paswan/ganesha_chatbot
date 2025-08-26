@@ -1,5 +1,7 @@
 # 🕉 Ganesh Bappa Chatbot  
 
+
+
 An **AI-powered conversational chatbot** that lets users talk to **Ganesh Bappa** ✨.  
 It supports **text and voice conversations**, with responses delivered in **natural voice** using AI-powered speech synthesis.  
 
@@ -9,6 +11,7 @@ Built with:
 - **AI Models** → Gemini API (LLM), Google Speech-to-Text, Edge-TTS (Azure Neural Voice)  
 
 ---
+LIVE DEMO VIDEO:- https://drive.google.com/file/d/1RjOm-6IlM7EF8yMUVGfh3U8k3KKRfxSj/view?usp=sharing
 
 ## 🚀 Features  
 - 🎤 **Voice Input**: Speak to Bappa (via browser mic)  
